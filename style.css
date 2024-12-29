@@ -106,14 +106,15 @@ body{
 
 #boardListEl li{
   margin-bottom: 20px;
-  background-color: #3D3BF3;
+  background-color: #D9EAFD;
   padding: 10px;
   border-radius: 9px;
   cursor: pointer;
+  color: black;
 }
 #boardListEl li.active{
-  background-color:#D9EAFD ;
-  color:black
+  background-color:#3D3BF3 ;
+  color:white;
 }
 .titleArea{
   display: flex;
@@ -130,4 +131,15 @@ body{
   border-radius: 9px;
   height: 40px;
   cursor: pointer;
+}
+.columnContainer{
+
+}
+.columnHeader{
+  display: flex;
+  align-items: center;
+}
+
+.columnBtnDiv{
+  display: flex;
 }

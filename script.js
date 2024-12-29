@@ -59,12 +59,12 @@ function handleModalSave(){
     case 'createBoard':
         createBoard(nameValue);
         break
-    // case 'createColumn':
-    //     createColumn(currentBoardId, nameValue);
-    //     break
-    // case 'editColumn':
-    //     editColumn(id, nameValue);
-    //     break
+    case 'createColumn':
+        createColumn(currentBoardId, nameValue);
+        break
+    case 'editColumn':
+        editColumn(id, nameValue);
+        break
     // case 'createTicket':
     //     createTicket(id, nameValue);
     //     break    
@@ -94,10 +94,41 @@ function selectBoard(boardId){
   const board = Boards.find(b => b.id === boardId);
   renderBoardDetails(board);
 }
+//column
+function createColumn(boardId,nameValue){
+  const board = Boards.find(b=>b.id ===boardId);
+  if(!board) return;
+
+  board.columns.push({
+    id: generateId('col'),
+    name:nameValue,
+    tickets:[]
+  })
+  renderBoardDetails(board);
+}
 
 function generateId(prefix) {
   return prefix+`-${Math.floor(Math.random() * 10000000)}`
 }
+
+function deleteColumn(colId){
+  const board = board.find(b=>b.id===currentBoardId);
+  if(!board) return;
+
+  board.columns = board.columns.filter(c=>c.id != colId);
+  renderBoardDetails(board);
+}
+
+
+function editColumn(colId, nameValue){
+  const board = Boards.find(b=>b.id ===currentBoardId);
+  if(!board) return;
+  const col = board.columns.find(c=>c.id ===colId);
+  if(!col) return;
+  col.name = nameValue;
+  renderBoardDetails(board)
+}
+
 
 function renderBoardList(){
   boardListEl.innerHTML =``;
@@ -130,7 +161,7 @@ function renderBoardDetails(board){
   const titleArea = document.createElement('div');
   titleArea.classList.add('titleArea');
 
-  console.log(titleArea);
+  // console.log(titleArea);
   const h2 = document.createElement('h2');
   h2.textContent = board.name;
 
@@ -148,4 +179,65 @@ function renderBoardDetails(board){
     })
   })
   titleArea.appendChild(addColBtn);
+
+  const columnContainer = document.createElement("div");
+  columnContainer.classList.add("columnContainer");
+
+  board.columns.forEach(col =>{
+
+    const columnEl =document.createElement('div');
+    columnEl.classList.add('column');
+
+    const columnHeader =document.createElement('div');
+    columnHeader.classList.add('columnHeader');
+
+    const columnTitle =document.createElement('div');
+    columnTitle.classList.add('columnTitle');
+
+    const h2 = document.createElement('h2');
+    h2.textContent= col.name;
+
+
+    columnTitle.appendChild(h2);
+    const columnBtnDiv =document.createElement('div');
+    columnBtnDiv.classList.add('columnBtnDiv');
+
+    const editColumnBtn =document.createElement('div');
+    editColumnBtn.classList.add('editColumnBtn');
+    editColumnBtn.textContent='✏️';
+    editColumnBtn.addEventListener('click',()=>{
+      openModel({
+        title:'Edit column',
+        ContextType:'editColumn',
+        ContextId:col.id,
+        defaultValue:col.name
+      })
+  
+    })
+
+
+    const deleteColumnBtn =document.createElement('div');
+    deleteColumnBtn.classList.add('deleteColumnBtn');
+    deleteColumnBtn.textContent = '🗑️';
+    deleteColumnBtn.addEventListener('click',()=>{
+      deleteColumn(col.id);
+    })
+
+    columnBtnDiv.appendChild(editColumnBtn);
+    columnBtnDiv.appendChild(deleteColumnBtn);
+
+    columnHeader.appendChild(columnTitle);
+    columnHeader.appendChild(columnBtnDiv)
+
+
+    columnEl.appendChild(columnHeader);
+
+    columnContainer.appendChild(columnEl);
+  })
+
+
+  boardDetailsEl.appendChild(columnContainer);
+
+  
+  // columnContainer.appendChild(columnContainerTitle);
 }
