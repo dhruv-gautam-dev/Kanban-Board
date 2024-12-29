@@ -1,0 +1,133 @@
+body{
+  padding: 0;
+  margin:0;
+}
+#app{
+  display: flex;
+  /* flex-direction: column; */
+}
+#sidebar{
+  width: 15%;
+  /* border: 2px solid black; */
+  height: 100vh;
+  background-color: #A294F9;
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+}
+#main{
+  width: 85%;
+}
+#createBoardBtn{
+  color:white;
+  background-color: rgb(73, 155, 71);
+  border:none;
+  padding: 10px;
+  border-radius: 9px;
+  font-size: larger;
+  margin-left: 20%;
+  cursor: pointer;
+}
+
+#main{
+  padding-left: 20px;
+}
+#boardDetails{
+  font-family: sans-serif;
+}
+
+#modalOverlay{
+  position: fixed;
+  top: 0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modelContent{
+  padding: 20px;
+  width: 300px;
+  max-width: 80%;
+  font-family: sans-serif;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  background-color: white;
+  border-radius: 9px;
+  gap: 12px;
+}
+.modelContent h3{
+  margin: 0;
+  margin-bottom: 12px;
+}
+
+#modalInput{
+  width: 90%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 12px;
+
+}
+.modleButtons{
+  display: flex;
+  justify-content: end;
+  padding-right: 20px;
+  box-sizing: border-box;
+  gap: 10px;
+}
+#modalSaveBtn{
+
+  padding: 8px  10px;
+  border: none;
+  background-color: rgb(69, 163, 105);
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+#modalCancelBtn{
+
+  padding: 8px  10px;
+  border: none;
+  background-color:rgb(199, 199, 199);
+  border-radius: 6px;
+  color: black;
+  cursor: pointer;
+}
+
+#boardListEl{
+    /* padding-left: 20px; */
+    list-style: none;
+    padding:20px;
+    gap:20px
+}
+
+#boardListEl li{
+  margin-bottom: 20px;
+  background-color: #3D3BF3;
+  padding: 10px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+#boardListEl li.active{
+  background-color:#D9EAFD ;
+  color:black
+}
+.titleArea{
+  display: flex;
+  align-items: center ;
+  padding: 10px;
+  gap:12px;
+}
+.titleArea button{
+  font-size: large;
+  background-color: rgb(73, 155, 71);
+  padding: 8px 15px;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  height: 40px;
+  cursor: pointer;
+}

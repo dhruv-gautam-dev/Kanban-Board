@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KanBan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+    <div id="app">
+      <div id="sidebar">
+        <h1>Boards</h1>
+        <Button id="createBoardBtn">Create Board</Button>
+        <ul id="boardListEl"></ul>
+      </div>
+      <div id="main">
+        <div id="boardDetailsEl">
+          <!-- <p>No board Selected, Create or Select the Board </p> -->
+        </div>
+      </div>
+    </div>
+    
+    <div id="modalOverlay">
+      <div class="modelContent">
+        <h3 id="modalTitle">Modal Title</h3>
+        <input type="text" id="modalInput" placeholder="Enter Name..." />
+        <input type="hidden" id="modalContextType" />
+        <input type="hidden" id="modalContextId" />
+        <div class="modleButtons">
+          <button id="modalSaveBtn">Save</button>
+          <button id="modalCancelBtn">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
