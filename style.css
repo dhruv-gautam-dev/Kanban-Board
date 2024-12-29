@@ -135,9 +135,25 @@ body{
 .columnContainer{
 
 }
+.column{
+  background-color: #e9ecef;
+  border-radius: 9px;
+  padding: 10px;
+  min-width: 220px;
+  max-width: 300px;
+  max-height: 500px;
+  overflow-y: hidden;
+  position: relative;
+}
 .columnHeader{
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  max-width: 300px;
+  padding: 10px;
+  padding-bottom: 0;
+  box-sizing: border-box;
+
 }
 
 .columnBtnDiv{

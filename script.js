@@ -65,12 +65,12 @@ function handleModalSave(){
     case 'editColumn':
         editColumn(id, nameValue);
         break
-    // case 'createTicket':
-    //     createTicket(id, nameValue);
-    //     break    
-    // case 'editTicket':
-    //     updateTicket(id, nameValue);
-    //     break            
+    case 'createTicket':
+        createTicket(id, nameValue);
+        break    
+    case 'editTicket':
+        updateTicket(id, nameValue);
+        break            
 }
 
   closeModal();
@@ -112,7 +112,7 @@ function generateId(prefix) {
 }
 
 function deleteColumn(colId){
-  const board = board.find(b=>b.id===currentBoardId);
+  const board = Boards.find(b=>b.id===currentBoardId);
   if(!board) return;
 
   board.columns = board.columns.filter(c=>c.id != colId);
@@ -128,7 +128,21 @@ function editColumn(colId, nameValue){
   col.name = nameValue;
   renderBoardDetails(board)
 }
+//Ticket
 
+function createTicket(colId, nameValue){
+  const board = Boards.find(b=>b.id ===currentBoardId);
+  if(!board) return;
+  const col = board.columns.find(c=>c.id=== colId);
+  if(!col) return;
+
+  columns.push({
+    id: generateId('ticket'),
+    name:nameValue,
+    
+  })
+  renderBoardDetails(board);
+}
 
 function renderBoardList(){
   boardListEl.innerHTML =``;
@@ -197,8 +211,8 @@ function renderBoardDetails(board){
     const h2 = document.createElement('h2');
     h2.textContent= col.name;
 
-
     columnTitle.appendChild(h2);
+
     const columnBtnDiv =document.createElement('div');
     columnBtnDiv.classList.add('columnBtnDiv');
 
@@ -228,10 +242,68 @@ function renderBoardDetails(board){
 
     columnHeader.appendChild(columnTitle);
     columnHeader.appendChild(columnBtnDiv)
-
-
     columnEl.appendChild(columnHeader);
 
+
+
+    const addTicketBtn = document.createElement('button');
+    addTicketBtn.classList.add("addTicketBtn");
+    addTicketBtn.textContent= `Add Ticket`
+    addTicketBtn.addEventListener('click',()=>{
+      openModel({
+        title:'Create Ticket',
+        ContextType:  'createTicket',
+        ContextId:''
+      })
+    })
+    columnEl.appendChild(addTicketBtn);
+
+    const TicketContainer = document.createElement("div");
+    TicketContainer.classList.add("TicketContainer");
+
+    columnEl.appendChild(TicketContainer);
+
+    col.tickets.forEach(ticket=>{
+      const ticketEl =document.createElement('div');
+      ticketEl.classList.add('ticketEl');
+
+      const ticketNameSpan = document.createElement('h3');
+      ticketNameSpan.classList.add('ticketNameSpan');
+      ticketNameSpan.textContent=ticket.name;
+
+      const ticketBtnDiv =document.createElement('div');
+      ticketBtnDiv.classList.add('ticketBtnDiv');
+    
+      const editTicketBtn =document.createElement('div');
+      editTicketBtn.classList.add('editTicketBtn');
+      editTicketBtn.textContent='✏️';
+      editTicketBtn.addEventListener('click',()=>{
+        openModel({
+          title:'Edit ticket',
+          ContextType:'editTicket',
+          ContextId:ticket.id,
+          defaultValue:ticket.name
+        })
+    
+      })
+
+    const deleteTicketBtn =document.createElement('div');
+    deleteTicketBtn.classList.add('deleteTicketBtn');
+    deleteTicketBtn.textContent = '🗑️';
+    deleteTicketBtn.addEventListener('click',()=>{
+      deleteTicket(col.id);
+    })
+
+    ticketBtnDiv.appendChild(editTicketBtn);
+    ticketBtnDiv.appendChild(deleteTicketBtn);
+    ticketNameSpan.appendChild(ticketBtnDiv);
+
+    ticketEl.appendChild(ticketNameSpan);
+    ticketEl.appendChild(ticketBtnDiv);
+
+    TicketContainer.appendChild(ticketEl);
+    })
+    columnEl.appendChild(TicketContainer)
     columnContainer.appendChild(columnEl);
   })
 
