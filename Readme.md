@@ -37,19 +37,9 @@ git clone https://github.com/dhruv-gautam-dev/Kanban-Board.git
   cd Kanban-Board
 ```
 
-3. **Install dependencies:**
+3. **Open index.html in your browser**
 
-```bash
-npm install
-```
-
-4.**Start the development server:**
-
-```bash
-  npm run dev
-```
-
-✅ The app will be running at http://localhost:3000
+✅ The Kanban board will be running locally.
 
 🚀 Getting Started
 
